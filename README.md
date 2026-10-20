@@ -20,7 +20,7 @@ The Service Request and Tracking System is a web-based application designed to h
 
 ### Project Links
 
-**GitHub Repository:** [View Source Code](https://github.com/rechieldmontero-byte/RECHIEL-LAPUT)
+**GitHub Repository:** [View Source Code]( https://github.com/rechieldmontero-byte/RECHIEL-LAPUT)
 
 **Live System:** [Open Live System](https://rechieldmontero-byte.github.io/RECHIEL-LAPUT/)
 
