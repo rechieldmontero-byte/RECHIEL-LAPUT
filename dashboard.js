@@ -3,6 +3,119 @@ let currentUser = null;
 let currentProfile = null;
 let submissions = [];
 
+const demoSubmissions = [
+  {
+    id: "demo-1",
+    academic_year: "2026-2027",
+    semester: "Semester 1",
+    gwa: 1.75,
+    enrolled_units: 18,
+    failed_count: 0,
+    incomplete_count: 0,
+    dropped_count: 0,
+    evidence_reference: "https://example.com/grades/angel-1.pdf",
+    submitted_at: "2026-09-15T09:30:00Z",
+    verification: "Verified",
+    verification_reason: "Complete and valid academic record.",
+    compliance: "Compliant",
+    compliance_reasons: ["Met GPA requirement", "No failed subjects"],
+    renewal: "Eligible",
+    decision_note: "Approved for renewal.",
+    scholar_assignments: {
+      profiles: { full_name: "Angel Grace R. Dela Cruz" },
+      scholarship_programs: { program_name: "Academic Excellence Grant" },
+    },
+  },
+  {
+    id: "demo-2",
+    academic_year: "2026-2027",
+    semester: "Semester 2",
+    gwa: 2.15,
+    enrolled_units: 17,
+    failed_count: 1,
+    incomplete_count: 0,
+    dropped_count: 1,
+    evidence_reference: "https://example.com/grades/joel-2.pdf",
+    submitted_at: "2026-10-02T08:15:00Z",
+    verification: "Pending",
+    verification_reason: "Awaiting review.",
+    compliance: "Needs Review",
+    compliance_reasons: ["Dropped subject requires explanation"],
+    renewal: "Pending",
+    decision_note: "Waiting for final evaluation.",
+    scholar_assignments: {
+      profiles: { full_name: "Joel M. Santos" },
+      scholarship_programs: { program_name: "STEM Scholarship" },
+    },
+  },
+  {
+    id: "demo-3",
+    academic_year: "2025-2026",
+    semester: "Semester 1",
+    gwa: 3.05,
+    enrolled_units: 15,
+    failed_count: 2,
+    incomplete_count: 1,
+    dropped_count: 0,
+    evidence_reference: "https://example.com/grades/maria-3.pdf",
+    submitted_at: "2026-01-12T14:00:00Z",
+    verification: "Returned",
+    verification_reason: "Incomplete supporting documents.",
+    compliance: "Non-Compliant",
+    compliance_reasons: ["GWA below threshold", "Missing proof of incomplete subject"],
+    renewal: "Not Eligible",
+    decision_note: "Please resubmit with required supporting evidence.",
+    scholar_assignments: {
+      profiles: { full_name: "Maria Isabel C. Gomez" },
+      scholarship_programs: { program_name: "Community Leadership Award" },
+    },
+  },
+  {
+    id: "demo-4",
+    academic_year: "2026-2027",
+    semester: "Summer",
+    gwa: 1.9,
+    enrolled_units: 9,
+    failed_count: 0,
+    incomplete_count: 0,
+    dropped_count: 0,
+    evidence_reference: "https://example.com/grades/renz-4.pdf",
+    submitted_at: "2026-08-09T12:40:00Z",
+    verification: "Verified",
+    verification_reason: "Grades match official transcript.",
+    compliance: "Compliant",
+    compliance_reasons: ["Passed all courses", "Within unit limit"],
+    renewal: "Eligible",
+    decision_note: "Eligible for next semester grant.",
+    scholar_assignments: {
+      profiles: { full_name: "Renz Adrian T. Flores" },
+      scholarship_programs: { program_name: "Merit Scholarship" },
+    },
+  },
+  {
+    id: "demo-5",
+    academic_year: "2026-2027",
+    semester: "Semester 2",
+    gwa: 2.65,
+    enrolled_units: 16,
+    failed_count: 1,
+    incomplete_count: 0,
+    dropped_count: 0,
+    evidence_reference: "https://example.com/grades/paul-5.pdf",
+    submitted_at: "2026-10-14T10:05:00Z",
+    verification: "Pending",
+    verification_reason: "Under staff review.",
+    compliance: "Reviewing",
+    compliance_reasons: ["One failed subject remains under evaluation"],
+    renewal: "Pending",
+    decision_note: "Monitoring academic standing.",
+    scholar_assignments: {
+      profiles: { full_name: "Paul Vincent L. Reyes" },
+      scholarship_programs: { program_name: "Service Scholarship" },
+    },
+  },
+];
+
 const escapeHTML = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({
   "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
 })[char]);
@@ -142,7 +255,8 @@ async function loadSubmissions() {
     $("recordsBody").innerHTML = `<tr><td colspan="7">${escapeHTML(error.message)}</td></tr>`;
     return;
   }
-  submissions = data || [];
+
+  submissions = data && data.length ? data : demoSubmissions;
   renderSubmissions();
 }
 
