@@ -4,26 +4,35 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Register - Scholarship Monitoring System</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
   <main class="auth-card">
-    <h1>Create Scholar Account</h1>
-    <p>Register to submit your semester academic summary.</p>
+    <p class="eyebrow">SCHOLARSHIP OFFICE</p>
+    <h1>Scholar Registration</h1>
+    <p>Register your student details and preferred scholarship program.</p>
     <form id="registerForm">
+      <label for="studentId">Student ID</label>
+      <input id="studentId" required maxlength="30" autocomplete="off" placeholder="e.g. 2026-001">
       <label for="fullName">Full name</label>
-      <input id="fullName" required maxlength="100" autocomplete="name">
-      <label for="email">Email</label>
-      <input id="email" type="email" required autocomplete="email">
-      <label for="password">Password</label>
-      <input id="password" type="password" minlength="8" required autocomplete="new-password">
-      <button type="submit">Create Account</button>
+      <input id="fullName" required maxlength="100" autocomplete="name" placeholder="e.g. Juan Dela Cruz">
+      <label for="regEmail">Email</label>
+      <input id="regEmail" type="email" required autocomplete="email" placeholder="name@example.com">
+      <label for="scholarshipProgram">Scholarship program</label>
+      <select id="scholarshipProgram" required>
+        <option value="" selected disabled>Select a program</option>
+        <option value="Merit Scholar">Merit Scholar</option>
+        <option value="Community Scholar">Community Scholar</option>
+      </select>
+      <label for="regPassword">Password</label>
+      <input id="regPassword" type="password" minlength="8" required autocomplete="new-password">
+      <button type="submit">Register</button>
       <p id="message" role="status" aria-live="polite"></p>
     </form>
     <p><a href="index.html">Back to Sign in</a></p>
   </main>
-  <script src="supabase.js"></script>
-  <script src="auth.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/auth.js"></script>
 </body>
 </html>
