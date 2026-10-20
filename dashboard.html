@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scholarship Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <h2>Scholarship System</h2>
+      <p id="userInfo">Loading account...</p>
+      <p id="roleInfo">Loading role...</p>
+      <button id="showSubmit">Submit Grades</button>
+      <button id="showRecords">View Submissions</button>
+      <button id="showAudit">Audit Logs</button>
+      <button id="logoutBtn">Logout</button>
+    </aside>
+    <main class="content">
+      <h1>Scholarship Monitoring Dashboard</h1>
+      <p class="muted">Manage academic submissions and scholarship renewals.</p>
+      <p id="notice" role="status" aria-live="polite"></p>
+      <section class="panel" id="submitPanel">
+        <h2>Semester Academic Summary</h2>
+        <form id="submissionForm">
+          <div class="grid">
+            <div><label for="program">Scholarship program</label><select id="program" required><option value="">Loading programs...</option></select></div>
+            <div><label for="semester">Semester</label><select id="semester" required><option value="Semester 1">Semester 1</option><option value="Semester 2">Semester 2</option><option value="Summer">Summer</option></select></div>
+            <div><label for="schoolYear">School year</label><input id="schoolYear" placeholder="2026-2027" required pattern="[0-9]{4}-[0-9]{4}"></div>
+            <div><label for="gwa">GWA (1.00–5.00)</label><input id="gwa" type="number" min="1" max="5" step="0.01" required></div>
+            <div><label for="units">Total units</label><input id="units" type="number" min="0" step="1" required></div>
+            <div><label for="failed">Failed subjects</label><input id="failed" type="number" min="0" step="1" value="0" required></div>
+            <div><label for="incomplete">Incomplete subjects</label><input id="incomplete" type="number" min="0" step="1" value="0" required></div>
+            <div><label for="dropped">Dropped subjects</label><input id="dropped" type="number" min="0" step="1" value="0" required></div>
+          </div>
+          <label for="documentReference">Grade document reference URL</label>
+          <input id="documentReference" type="url" placeholder="https://..." required>
+          <p class="muted">Enter the approved reference to grade evidence. Files are not uploaded by this app.</p>
+          <button type="submit">Submit Academic Summary</button>
+        </form>
+      </section>
+      <section class="panel" id="recordsPanel">
+        <h2>Submission Records</h2>
+        <label for="searchInput">Search by scholar, program, or status</label>
+        <input id="searchInput" placeholder="Type to search...">
+        <div class="table-wrap"><table>
+          <thead><tr><th>Scholar / Program</th><th>Academic Results</th><th>Evidence</th><th>Verification</th><th>Compliance</th><th>Renewal</th><th>Staff Actions</th></tr></thead>
+          <tbody id="recordsBody"><tr><td colspan="7">Loading submissions...</td></tr></tbody>
+        </table></div>
+      </section>
+      <section class="panel" id="auditPanel">
+        <h2>Audit Trail</h2>
+        <div class="table-wrap"><table><thead><tr><th>Date</th><th>Actor</th><th>Action</th><th>Details</th></tr></thead><tbody id="auditBody"></tbody></table></div>
+      </section>
+    </main>
+  </div>
+  <script src="js/supabase.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in - Scholarship Monitoring System</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <main class="auth-card">
+    <p class="eyebrow">SCHOLARSHIP OFFICE</p>
+    <h1>Scholarship Monitoring System</h1>
+    <p class="muted">Sign in to view or manage scholarship submissions.</p>
+    <form id="loginForm">
+      <label for="email">Email</label>
+      <input id="email" type="email" required autocomplete="username">
+      <label for="password">Password</label>
+      <input id="password" type="password" required autocomplete="current-password">
+      <button type="submit">Sign in</button>
+      <p id="loginMessage" role="status" aria-live="polite"></p>
+    </form>
+    <p class="small"><a href="register.html">Create scholar account</a></p>
+  </main>
+  <script src="js/supabase.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>
