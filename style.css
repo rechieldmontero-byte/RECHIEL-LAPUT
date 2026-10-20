@@ -1,0 +1,180 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background: #f1f5f2;
+  color: #203126;
+}
+
+.auth-card {
+  width: min(92%, 430px);
+  margin: 70px auto;
+  padding: 30px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 28px #00000012;
+}
+
+h1 {
+  color: #176b43;
+  font-size: 25px;
+}
+
+p {
+  line-height: 1.5;
+}
+
+label {
+  display: block;
+  margin: 15px 0 7px;
+  font-weight: bold;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cbd5ce;
+  border-radius: 8px;
+  font: inherit;
+  background: white;
+}
+
+button {
+  padding: 12px 16px;
+  background: #187348;
+  color: white;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #105735;
+}
+
+.auth-card button {
+  width: 100%;
+  margin-top: 20px;
+}
+
+a {
+  color: #176b43;
+}
+
+#message {
+  overflow-wrap: anywhere;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.sidebar {
+  background: #145a39;
+  color: white;
+  padding: 24px 16px;
+}
+
+.sidebar h2 {
+  font-size: 21px;
+}
+
+.sidebar button {
+  display: block;
+  width: 100%;
+  margin: 12px 0;
+  text-align: left;
+  background: #ffffff18;
+}
+
+.content {
+  padding: 28px;
+  min-width: 0;
+}
+
+.panel {
+  padding: 22px;
+  margin: 20px 0;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px #0000000a;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+th, td {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #e2e8e3;
+  vertical-align: top;
+}
+
+th {
+  background: #e7f3ea;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.small-button {
+  width: auto;
+  margin: 3px;
+  padding: 8px 10px;
+}
+
+.muted {
+  color: #68766c;
+}
+
+@media (max-width: 750px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    padding: 14px;
+  }
+
+  .sidebar button {
+    display: inline-block;
+    width: auto;
+  }
+
+  .content {
+    padding: 15px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-card {
+    margin-top: 30px;
+  }
+}
