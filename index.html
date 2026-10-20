@@ -3,140 +3,31 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Scholarship Dashboard</title>
+  <title>Login - Scholarship Monitoring System</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-  <div class="layout">
-    <aside class="sidebar">
-      <h2>Scholarship System</h2>
-      <button id="showSubmit" type="button">Submit Grades</button>
-      <button id="showAddSummary" type="button" hidden>Add Academic Summary</button>
-      <button id="showRecords">View Submissions</button>
-      <button id="showScholars" hidden>Scholar Management</button>
-      <button id="showAudit">Audit Logs</button>
-      <button id="logoutBtn">Logout</button>
-    </aside>
-    <main class="content">
-      <header class="dashboard-topbar">
-        <div>
-          <h1>Scholarship Monitoring Dashboard</h1>
-          <p class="muted">Manage academic submissions and scholarship renewals.</p>
-        </div>
-        <button id="showAcademicSummary" type="button">Academic Summary</button>
-      </header>
-      <p id="notice" role="status" aria-live="polite"></p>
-      <section class="panel" id="submitPanel">
-        <h2>Semester Academic Summary</h2>
-        <form id="submissionForm">
-          <div class="grid">
-            <div>
-              <label for="program">Scholarship program</label>
-              <select id="program" required>
-                <option value="">Select a program</option>
-                <option value="Merit Scholar">Merit Scholar</option>
-                <option value="Community Scholar">Community Scholar</option>
-              </select>
-            </div>
-            <div><label for="semester">Semester</label><select id="semester" required><option value="Semester 1">Semester 1</option><option value="Semester 2">Semester 2</option><option value="Summer">Summer</option></select></div>
-            <div><label for="schoolYear">School year</label><input id="schoolYear" placeholder="2026-2027" required pattern="[0-9]{4}-[0-9]{4}"></div>
-            <div><label for="gwa">GWA (1.00–5.00)</label><input id="gwa" type="number" min="1" max="5" step="0.01" required></div>
-            <div><label for="units">Total units</label><input id="units" type="number" min="0" step="1" required></div>
-            <div><label for="failed">Failed subjects</label><input id="failed" type="number" min="0" step="1" value="0" required></div>
-            <div><label for="incomplete">Incomplete subjects</label><input id="incomplete" type="number" min="0" step="1" value="0" required></div>
-            <div><label for="dropped">Dropped subjects</label><input id="dropped" type="number" min="0" step="1" value="0" required></div>
-          </div>
-          <button type="submit">Submit Academic Summary</button>
-        </form>
-      </section>
-      <section class="panel" id="recordsPanel" hidden>
-        <h2>Submission Records</h2>
-        <label for="searchInput">Search by scholar, program, or status</label>
-        <input id="searchInput" placeholder="Type to search...">
-        <div class="table-wrap"><table>
-          <thead><tr><th>Scholar / Program</th><th>Academic Results</th><th>Verification</th><th>Compliance</th><th>Renewal</th><th>Staff Actions</th></tr></thead>
-          <tbody id="recordsBody"><tr><td colspan="6">Loading submissions...</td></tr></tbody>
-        </table></div>
-        <dialog id="staffSubmissionDialog">
-          <form id="staffSubmissionForm" class="dialog-form">
-            <h2 id="staffSubmissionHeading">Add Academic Summary</h2>
-            <label for="staffScholarSelect">Scholar</label>
-            <select id="staffScholarSelect" required>
-              <option value="">Select a scholar</option>
-            </select>
-            <label for="staffSchoolYear">School year</label>
-            <input id="staffSchoolYear" placeholder="2026-2027" required pattern="[0-9]{4}-[0-9]{4}">
-            <label for="staffSemester">Semester</label>
-            <select id="staffSemester" required>
-              <option value="Semester 1">Semester 1</option>
-              <option value="Semester 2">Semester 2</option>
-              <option value="Summer">Summer</option>
-            </select>
-            <label for="staffGwa">GWA (1.00–5.00)</label>
-            <input id="staffGwa" type="number" min="1" max="5" step="0.01" required>
-            <label for="staffUnits">Total units</label>
-            <input id="staffUnits" type="number" min="0" step="1" required>
-            <label for="staffFailed">Failed subjects</label>
-            <input id="staffFailed" type="number" min="0" step="1" value="0" required>
-            <label for="staffIncomplete">Incomplete subjects</label>
-            <input id="staffIncomplete" type="number" min="0" step="1" value="0" required>
-            <label for="staffDropped">Dropped subjects</label>
-            <input id="staffDropped" type="number" min="0" step="1" value="0" required>
-            <p id="staffSubmissionMessage" role="status" aria-live="polite"></p>
-            <div class="form-actions">
-              <button id="saveStaffSubmission" type="submit">Save Summary</button>
-              <button id="cancelStaffSubmission" class="secondary" type="button">Cancel</button>
-            </div>
-          </form>
-        </dialog>
-      </section>
-      <section class="panel" id="scholarsPanel" hidden>
-        <div class="panel-heading">
-          <div>
-            <h2>Scholar Management</h2>
-            <p class="muted">Add or edit scholar details and their active scholarship assignment.</p>
-          </div>
-          <button id="newScholarBtn" type="button">Add Scholar</button>
-        </div>
-        <dialog id="scholarDialog" aria-labelledby="scholarFormHeading">
-          <form id="scholarForm" class="dialog-form">
-            <h2 id="scholarFormHeading">Add scholar</h2>
-            <div class="grid">
-              <div><label for="studentId">Student ID</label><input id="studentId" maxlength="30" required></div>
-              <div><label for="fullName">Full name</label><input id="fullName" maxlength="100" required></div>
-              <div><label for="scholarEmail">Account email</label><input id="scholarEmail" type="email" required></div>
-              <div>
-                <label for="scholarProgram">Scholarship program</label>
-                <select id="scholarProgram" required>
-                  <option value="">Select a program</option>
-                  <option value="Merit Scholar">Merit Scholar</option>
-                  <option value="Community Scholar">Community Scholar</option>
-                </select>
-              </div>
-            </div>
-            <p id="scholarFormHint" class="muted">Register the scholar account first using this email, then add the student details and assign a program here. This form does not set passwords.</p>
-            <p id="scholarFormMessage" role="status" aria-live="polite"></p>
-            <div class="form-actions">
-              <button id="saveScholarBtn" type="submit">Add Scholar</button>
-              <button id="cancelScholarEdit" class="secondary" type="button">Cancel</button>
-            </div>
-          </form>
-        </dialog>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Student ID</th><th>Full name</th><th>Email</th><th>Program</th><th>Account status</th><th>Actions</th></tr></thead>
-            <tbody id="scholarsBody"><tr><td colspan="6">Loading scholars...</td></tr></tbody>
-          </table>
-        </div>
-      </section>
-      <section class="panel" id="auditPanel" hidden>
-        <h2>Audit Trail</h2>
-        <div class="table-wrap"><table><thead><tr><th>Date</th><th>Actor</th><th>Action</th><th>Details</th></tr></thead><tbody id="auditBody"></tbody></table></div>
-      </section>
-    </main>
-  </div>
+  <main class="auth-card">
+    <p class="eyebrow">SCHOLARSHIP OFFICE</p>
+    <h1>Sign in</h1>
+    <p>Access your scholarship account and manage academic submissions.</p>
+
+    <form id="loginForm">
+      <label for="email">Email</label>
+      <input id="email" type="email" required autocomplete="email" placeholder="name@example.com">
+
+      <label for="password">Password</label>
+      <input id="password" type="password" required autocomplete="current-password" placeholder="Enter your password">
+
+      <button type="submit">Login</button>
+      <p id="loginMessage" role="status" aria-live="polite"></p>
+    </form>
+
+    <p><a href="register.html">Create an account</a></p>
+  </main>
+
   <script src="supabase.js"></script>
-  <script src="dashboard.js"></script>
+  <script src="login.js"></script>
 </body>
 </html>
